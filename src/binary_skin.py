@@ -8,10 +8,13 @@ import math as m
 from matplotlib.patches import Circle
 
 import matplotlib.pyplot as plt
+from skimage.morphology import label
+# import sys
+# np.set_printoptions(threshold=sys.maxsize)
 
 # detect skin in RGB image using HSV thresholding
-# params: n x m RGB image
-# return: n x m array with face pixels as 1 and else as 0
+# params: img - n x m RGB image
+# return: newImg - n x m array with face pixels as 1 and else as 0
 # hue and saturation values modified from https://stackoverflow.com/a/8757076
 def binary_skin(img):
     hsvImg = rgb2hsv(img)
@@ -25,14 +28,40 @@ def binary_skin(img):
     kernel = np.array([[0, 0, 1, 0, 0], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0], [0, 0, 1, 0, 0]])
     newImg = ndimage.binary_dilation(newImg, structure=kernel, iterations=6).astype(int)
     newImg = ndimage.binary_erosion(newImg, structure=kernel, iterations=6).astype(int)
+    return newImg
 
-    plt.set_cmap('gray')
-    plt.imshow(newImg)
-    plt.show()
-    return
+# computes connected components in image
+# params: binaryImg - a binary image to perform CC on
+# return: labeledImg - image with each pixel labeled as the component number it belongs to
+#         numComponents - number of connected components, subtracting 1 as 0 values are simply background
+def connected_components(binaryImg):
+    labeledImg = label(binaryImg, connectivity=2)
+    numComponents = np.unique(labeledImg)
+    return labeledImg, numComponents.shape[0] - 1
+
+# normalize colors in img with connected components
+# params: img - original n x m RGB image
+#         connectedComponents - n x m array with each pixel labeled with its component number
+# return: normalizedComponents - n x m RGB image where each connected component has its pixels
+#                                within an HSV range normalized to median HSV within the component
+def normalize_connected_components(img, connectedComponents):
+    pass
+
 
 # test
-imgName = "../res/images/test_binary_skin_2.jpg"
+imgName = "../res/images/test_binary_skin_1.jpg"
 img = imread(imgName)
 r = int(min(img.shape[0], img.shape[1]))
-binary_skin(img)
+result = binary_skin(img)
+
+
+plt.set_cmap('gray')
+plt.imshow(result)
+plt.show()
+
+result, numComponents = connected_components(result)
+print(numComponents)
+
+plt.set_cmap('viridis')
+plt.imshow(result)
+plt.show()
