@@ -39,29 +39,17 @@ def connected_components(binaryImg):
     numComponents = np.unique(labeledImg)
     return labeledImg, numComponents.shape[0] - 1
 
-# normalize colors in img with connected components
-# params: img - original n x m RGB image
-#         connectedComponents - n x m array with each pixel labeled with its component number
-# return: normalizedComponents - n x m RGB image where each connected component has its pixels
-#                                within an HSV range normalized to median HSV within the component
-def normalize_connected_components(img, connectedComponents):
-    pass
 
-
-# test
+# test ------------------------------------------------
 imgName = "../res/images/test_binary_skin_1.jpg"
 img = imread(imgName)
-r = int(min(img.shape[0], img.shape[1]))
+
 result = binary_skin(img)
-
-
 plt.set_cmap('gray')
 plt.imshow(result)
 plt.show()
 
 result, numComponents = connected_components(result)
-print(numComponents)
-
 plt.set_cmap('viridis')
 plt.imshow(result)
 plt.show()
