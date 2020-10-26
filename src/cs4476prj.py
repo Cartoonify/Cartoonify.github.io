@@ -23,15 +23,17 @@ Original file is located at
 """
 
 #export
+from matplotlib import use
 import numpy as np
 np.set_printoptions(threshold=np.inf)
 from sklearn.cluster import KMeans
-from skimage.color import rgb2hsv, hsv2rgb
+from skimage.color import rgb2hsv, hsv2rgb, rgb2gray, rgba2rgb
 from skimage import feature, color, draw
 from imageio import imread, imsave
 from scipy import ndimage
 from typing import Tuple
 from PIL import Image
+import matplotlib.pyplot as plt
 
 #export
 def quantize_hsv(img: np.ndarray, k: int) -> np.ndarray:
@@ -127,8 +129,60 @@ def quantize_rgb(img: np.ndarray, k: int) -> np.ndarray:
     return quantized_img
 
 # Canny
-# test
+def edgeDetection(img, low, high):
 
+    edges = feature.canny(img, sigma=2, low_threshold=low, high_threshold=high)
+
+    return edges
+
+original = imread("../res/images/jogging_lowres.jpg")
+if original.shape[2] == 4:
+    original = rgba2rgb(original).astype(np.uint8)
+# img = imread("../res/images/fish2.png")
+# img2 = imread("../res/images/fish.png")
+
+img1 = quantize_rgb(original, k=16)
+# img2 = quantize_rgb(original, k=32).astype(np.unint8)
+
+# print(type(original[0,0,0]), type(img2[0,0,0]), np.max(img2))
+
+# img1 = original
+img2 = original
+
+if img1.shape[2] == 4:
+    img1 = rgba2rgb(img1)
+
+if img2.shape[2] == 4:
+    img2 = rgba2rgb(img2)
+
+img_gray = rgb2gray(img2)
+
+edges = edgeDetection(img_gray, 0.1, 0.3)
+# test = np.array([
+#     [0, 1, 0],
+#     [1, 1, 1],
+#     [0, 1, 0]])
+# edges = ndimage.correlate(edges, test)
+
+overlaid_img = np.copy(img1)
+overlaid_img[edges] = 0
+
+fig, axs = plt.subplots(1, 3)
+
+
+axs[0].imshow(img1)
+axs[1].imshow(edges, cmap="gray")
+axs[2].imshow(overlaid_img)
+
+# fig, axs = plt.subplots(5, 5, figsize=(10,10))
+
+# for i in range(5):
+#     for j in range(5):
+#         edges = edgeDetection(img_gray, i * 0.2, j * 0.2)
+#         axs[i, j].imshow(edges, cmap="gray")
+#         axs[i, j].set_title("low: " + str(i * 0.2) + " | high: " + str(j * 0.2))
+
+plt.show()
 # Smooth/reinforce lines
 
 # Textures
