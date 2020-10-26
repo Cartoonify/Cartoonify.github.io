@@ -32,6 +32,8 @@ from imageio import imread, imsave
 from scipy import ndimage
 from typing import Tuple
 from PIL import Image
+from matplotlib import pyplot as plt
+import texture
 
 #export
 def quantize_hsv(img: np.ndarray, k: int) -> np.ndarray:
@@ -132,6 +134,18 @@ def quantize_rgb(img: np.ndarray, k: int) -> np.ndarray:
 # Smooth/reinforce lines
 
 # Textures
+# img_array = imread('hill.jpg')
+
+# fig = plt.figure()
+# axes = plt.axes()
+
+# temp = texture.FillColors(img_array, 15)
+# image = temp.get_img()
+# fitered = texture.median_filter(img_array)
+
+# axes.imshow(fitered)
+# plt.show()
+
 #test2
 
 # Blob detection
