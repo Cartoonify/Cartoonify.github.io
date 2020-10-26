@@ -34,7 +34,7 @@ from typing import Tuple
 from PIL import Image
 
 #export
-def quantize_hsv(img: np.ndarray, k: int) -> np.ndarray:
+def quantize_hsv(img: np.ndarray, k: int):
     """
     Compute the k-means clusters for the input image in the hue dimension of the
     HSV space. Replace the hue values with the nearest cluster's hue value. Finally,
@@ -90,7 +90,7 @@ def quantize_hsv(img: np.ndarray, k: int) -> np.ndarray:
 
 # Quantize RGB
 #export
-def quantize_rgb(img: np.ndarray, k: int) -> np.ndarray:
+def quantize_rgb(img: np.ndarray, k: int):
     """
     Compute the k-means clusters for the input image in RGB space, and return
     an image where each pixel is replaced by the nearest cluster's average RGB
