@@ -34,6 +34,7 @@ from scipy import ndimage
 from typing import Tuple
 from PIL import Image
 import matplotlib.pyplot as plt
+from edgeDetection import edgeDetection
 
 #export
 def quantize_hsv(img: np.ndarray, k: int) -> np.ndarray:
@@ -128,15 +129,7 @@ def quantize_rgb(img: np.ndarray, k: int) -> np.ndarray:
     
     return quantized_img
 
-# Canny
-def edgeDetection(img, quantize_img):
-    img_gray = rgb2gray(quantize_img.astype(np.uint8))
-    edges = feature.canny(img_gray, sigma=2, low_threshold=0.1, high_threshold=0.3)
-    overlaid_img = np.copy(quantize_img)
-    overlaid_img[edges] = 0
-    return edges, overlaid_img
-
-original = imread("../res/images/landscape_lowres.jpg")
+original = imread("../res/images/fish.jpg")
 if original.shape[2] == 4:
     original = rgba2rgb(original).astype(np.uint8)
 
