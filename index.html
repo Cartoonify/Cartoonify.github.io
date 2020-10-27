@@ -81,9 +81,9 @@ To recreate the textures of a cartoon, we will detect highly textured areas with
 <br><br>
 <!-- Results -->
 <h3>Experiments and results</h3>
-Not yet gathered
 <!--Provide details about the experimental set up (number of images/videos, number of datasets you experimented with, train/test split if you used machine learning algorithms, etc.). Describe the evaluation metrics you used to evaluate how well your approach is working. Include clear figures and tables, as well as illustrative qualitative examples if appropriate. Be sure to include obvious baselines to see if your approach is doing better than a naive approach (e.g. for classification accuracy, how well would a classifier do that made random decisions?). Also discuss any parameters of your algorithms, and tell us how you set the values of those parameters. You can also show us how the performance varies as you change those parameter values. Be sure to discuss any trends you see in your results, and explain why these trends make sense. Are the results as expected? Why?-->
-
+<h5>Edge Detection and outlining</h5>
+    For the automatic edge detection, we used a canny edge detector. We experimented with different sigmas, low thresholds, and high thresholds to find the optimal setting for our needs. To accomplish this, we would take a sample image and plot a 5x5 grid of images, varying the low threshold on the y-axis and the high threshold on the x-axis. We would then run this test for varying sigma values and ultimately decide which configuration gave the best qualitative results. After finding these values, we run the canny edge detection on a gray-scale version of the input image and overlay the resulting edges as a black outline on the image. To better approximate how this would be used in the finished project, we also would first quantize the image before performing these steps. Additional experimentation performed was processing the edge detection on the original image, or a higher bin count quantizated version of the image (k=32), and then overlay those edges on a lower bin count quantized version (k=8). This served the give more outlining detail in the image than is apparent from just the colors, and gave a better sense of texture in the resulting image.
 <br><br>
 
 <!-- Main Results Figure --> 
