@@ -23,17 +23,20 @@ Original file is located at
 """
 
 #export
+from matplotlib import use
 import numpy as np
 np.set_printoptions(threshold=np.inf)
 from sklearn.cluster import KMeans
-from skimage.color import rgb2hsv, hsv2rgb
+from skimage.color import rgb2hsv, hsv2rgb, rgb2gray, rgba2rgb
 from skimage import feature, color, draw
 from imageio import imread, imsave
 from scipy import ndimage
 from typing import Tuple
 from PIL import Image
+from edgeDetection import edgeDetection
 from matplotlib import pyplot as plt
 import texture
+
 
 #export
 def quantize_hsv(img: np.ndarray, k: int):
@@ -128,9 +131,21 @@ def quantize_rgb(img: np.ndarray, k: int):
     
     return quantized_img
 
-# Canny
-# test
+original = imread("../res/images/fish.jpg")
+if original.shape[2] == 4:
+    original = rgba2rgb(original).astype(np.uint8)
 
+img_quantize = quantize_rgb(original, k=8)
+
+edges, overlaid = edgeDetection(original, img_quantize)
+
+fig, axs = plt.subplots(1, 3)
+
+axs[0].imshow(original)
+axs[1].imshow(edges, cmap="gray")
+axs[2].imshow(overlaid)
+
+plt.show()
 # Smooth/reinforce lines
 
 # Textures
