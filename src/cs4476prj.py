@@ -33,11 +33,13 @@ from imageio import imread, imsave
 from scipy import ndimage
 from typing import Tuple
 from PIL import Image
-import matplotlib.pyplot as plt
 from edgeDetection import edgeDetection
+from matplotlib import pyplot as plt
+import texture
+
 
 #export
-def quantize_hsv(img: np.ndarray, k: int) -> np.ndarray:
+def quantize_hsv(img: np.ndarray, k: int):
     """
     Compute the k-means clusters for the input image in the hue dimension of the
     HSV space. Replace the hue values with the nearest cluster's hue value. Finally,
@@ -93,7 +95,7 @@ def quantize_hsv(img: np.ndarray, k: int) -> np.ndarray:
 
 # Quantize RGB
 #export
-def quantize_rgb(img: np.ndarray, k: int) -> np.ndarray:
+def quantize_rgb(img: np.ndarray, k: int):
     """
     Compute the k-means clusters for the input image in RGB space, and return
     an image where each pixel is replaced by the nearest cluster's average RGB
@@ -147,6 +149,18 @@ plt.show()
 # Smooth/reinforce lines
 
 # Textures
+# img_array = imread('hill.jpg')
+
+# fig = plt.figure()
+# axes = plt.axes()
+
+# temp = texture.FillColors(img_array, 15)
+# image = temp.get_img()
+# fitered = texture.median_filter(img_array)
+
+# axes.imshow(fitered)
+# plt.show()
+
 #test2
 
 # Blob detection
