@@ -98,10 +98,18 @@ depending on the contrast of the image, the filter size needed to be adjusted.
   <figcaption>Result of applying median filter with larger filter size</figcaption>
 </div>
 
-Therefore, with these issues to consider, we needed to create a way to consolidate the colors and to create a consistent filter size. To address this,
-we created a method that would determine areas where the colors are similar and fill them with their average color. In doing so, the image produced overall 
-had fewer colors and more solid colors. Once we were satisfied with the result, we experimented with using the different filters again and decided the 
-median filter visually looked the best. 
+Therefore, with these issues to consider, we needed to create a way to consolidate the 
+colors and to create a consistent filter size. To address this, we created a 
+method that would determine areas where the colors are similar and fill them with 
+their average color. To determine if the colors are similar, we used a color 
+threshold where if the difference in color is less than that, then those pixels 
+would be grouped in an area mask. The higher the threshold, the larger the areas 
+that were filled. However, if it was too high, there was too much overlap for the 
+objects and caused the area to be filled as a large blob. The threshold would 
+vary for the given images. As a result, the image produced overall had fewer 
+colors and more solid colors, which is what we expected. Once we were satisfied 
+with the result, we experimented with using the different filters again and 
+decided the median filter visually looked the best. 
 
 <div style="text-align: center; margin: 15px 0 15px 0;">
   <img style="height: 200px;" alt="" src="texture_filled.jpg">
