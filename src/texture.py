@@ -93,8 +93,10 @@ class FillColors():
 
 def median_filter(img: np.ndarray):
     print('Applying median filter...')
-    return ndimage.median_filter(img, 1)
+    filtered = ndimage.median_filter(img, 1)
     print('Done applying median filter!')
+    return filtered
+    
 
 # def main():
 #     img_array = imread('hill.jpg')
@@ -103,7 +105,8 @@ def median_filter(img: np.ndarray):
 #     axes = plt.axes()
 
 #     temp = FillColors(img_array, 15)
-#     image = temp.get_img()
+#     img_array = temp.get_img()
+
 #     filtered = median_filter(img_array)
 
 #     axes.imshow(filtered)
