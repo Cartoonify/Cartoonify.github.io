@@ -83,6 +83,32 @@ To recreate the textures of a cartoon, we will detect highly textured areas with
 <h3>Experiments and results</h3>
 Not yet gathered
 <!--Provide details about the experimental set up (number of images/videos, number of datasets you experimented with, train/test split if you used machine learning algorithms, etc.). Describe the evaluation metrics you used to evaluate how well your approach is working. Include clear figures and tables, as well as illustrative qualitative examples if appropriate. Be sure to include obvious baselines to see if your approach is doing better than a naive approach (e.g. for classification accuracy, how well would a classifier do that made random decisions?). Also discuss any parameters of your algorithms, and tell us how you set the values of those parameters. You can also show us how the performance varies as you change those parameter values. Be sure to discuss any trends you see in your results, and explain why these trends make sense. Are the results as expected? Why?-->
+<h5>Smooth Textures</h5>
+For smoothing textures, we initially experimented with various filters including the median, gaussian, and laplace filter. 
+We ran these tests against our compiled 10 images to experiment with initially and visually checked for the desired results.
+For filters such as the gaussian, it resulted in too blurry of a result; therefore, we decided against using those.
+When trying other filters, we also ran into an issue where the filters would discolor the image when the size was set too high and 
+depending on the contrast of the image, the filter size needed to be adjusted. 
+<div style="text-align: center; margin: 15px 0 15px 0;">
+  <img style="height: 200px;" alt="" src="./res/images/hill.jpg">
+  <figcaption style="padding-bottom: 15px;">Original Image</figcaption>
+  <img style="height: 200px;" alt="" src="gaussian_filter.jpg">
+  <figcaption style="padding-bottom: 15px;">Result of applying gaussian filter</figcaption>
+  <img style="height: 200px;" alt="" src="median_filter.jpg">
+  <figcaption>Result of applying median filter with larger filter size</figcaption>
+</div>
+
+Therefore, with these issues to consider, we needed to create a way to consolidate the colors and to create a consistent filter size. To address this,
+we created a method that would determine areas where the colors are similar and fill them with their average color. In doing so, the image produced overall 
+had fewer colors and more solid colors. Once we were satisfied with the result, we experimented with using the different filters again and decided the 
+median filter visually looked the best. 
+
+<div style="text-align: center; margin: 15px 0 15px 0;">
+  <img style="height: 200px;" alt="" src="texture_filled.jpg">
+  <figcaption style="padding-bottom: 15px;">Result of applying color fill</figcaption>
+  <img style="height: 200px;" alt="" src="texture_filled_with_median_filter.jpg">
+  <figcaption>Result of applying median filter with color fill</figcaption>
+</div>
 
 <br><br>
 
@@ -109,7 +135,7 @@ Not yet gathered
 
   <hr>
   <footer> 
-  <p>© You Name Here</p>
+  <p>© Joseph Lee, Kelsey Henson, Lydon Puzon, Roger Nhan, Sabrina Chua</p>
   </footer>
 </div>
 </div>
