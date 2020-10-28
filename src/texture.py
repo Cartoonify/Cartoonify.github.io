@@ -1,4 +1,4 @@
-import cv2
+# import cv2
 from imageio import imread, imsave
 from matplotlib import pyplot as plt
 import numpy as np
@@ -6,13 +6,15 @@ from scipy import ndimage
 from skimage import color
 
 class FillColors():
-    def __init__(self, img, color_threshold):
+    def __init__(self, img, color_threshold, face_mask):
         self.img_array = img
 
         smaller_img = np.copy(img).astype(np.float32) / 255
         self.img_vals = color.rgb2lab(smaller_img)
 
         self.color_threshold = color_threshold
+
+        self.face_mask = face_mask
 
         self.curr_col = None
         self.curr_row = None
@@ -40,7 +42,7 @@ class FillColors():
         color_to_check = self.img_vals[row][col]
         deltaE = color.deltaE_ciede94(color_to_check, self.curr_color)
 
-        return deltaE <= self.color_threshold
+        return deltaE <= self.color_threshold#(1 if self.face_mask[row][col] > 0 else self.color_threshold)
 
     def fill_colors(self):
         img_rows, img_cols, _ = self.img_vals.shape

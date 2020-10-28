@@ -41,15 +41,15 @@ def connected_components(binaryImg):
 
 
 # test ------------------------------------------------
-imgName = "../res/images/test_binary_skin_1.jpg"
-img = imread(imgName)
+# imgName = "../res/images/test_binary_skin_1.jpg"
+# img = imread(imgName)
 
-result = binary_skin(img)
-plt.set_cmap('gray')
-plt.imshow(result)
-plt.show()
+# result = binary_skin(img)
+# plt.set_cmap('gray')
+# plt.imshow(result)
+# plt.show()
 
-result, numComponents = connected_components(result)
-plt.set_cmap('viridis')
-plt.imshow(result)
-plt.show()
+# result, numComponents = connected_components(result)
+# plt.set_cmap('viridis')
+# plt.imshow(result)
+# plt.show()
