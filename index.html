@@ -156,7 +156,6 @@
         specific image will require a specifically chosen k-value to balance
         this consideration of preserving coloring and gaining averaged results.
         <br />
-        <!--Image-->
         <br />
         This first set of images displays our results for normalizing an image
         at k=10 cluster centers. The figure in the left represents the
@@ -165,7 +164,35 @@
         this function outputs an image with the coloring visibly simplified from
         the original.
         <br />
-        <!--Image-->
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./res/images/NormalizingColor2.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Quantization Figure 1
+          </figcaption>
+        </div>
+        <br />
+        The figure below, using k-value=14 cluster center, in this case shows a
+        less distinctive result. Noticeably, the coloring bandana and painting
+        in the background are more normalized to solid colors. The background of
+        wood chips is relatively the same, however, because it is heavily
+        textured. For this instance, we may need to consider adding texture
+        smoothing before color alterations as we continue with the project.
+
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./res/images/NormalizingColor1.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Quantization Figure 2
+          </figcaption>
+        </div>
         <br />
 
         <h5>Edge Detection and outlining</h5>
@@ -187,9 +214,27 @@
         detail in the image than is apparent from just the colors, and gave a
         better sense of texture in the resulting image.
         <br />
-        <!--Image-->
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./out/Edge_Detection_Experimentation.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Edge Detection Experimentation
+          </figcaption>
+        </div>
         <br />
-        <!--Image-->
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./out/Edge_Detection_Test.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Edge Detection Test
+          </figcaption>
+        </div>
         <br />
         Outline reinforcement was achieved by using a modification of the canny
         edge detector. The process of non-maximal suppression retains only the
@@ -206,7 +251,16 @@
         will theoretically improve the accuracy of the thickness of the
         outlines.
         <br />
-        <!--Image-->
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./out/outline_reinforcement.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Outline Reinforcement Test
+          </figcaption>
+        </div>
         <br />
 
         <h5>Smooth Textures</h5>
@@ -276,7 +330,12 @@
         something like Viola Jones or applying SIFT on the blobs returned by the
         skin detector.
         <br />
-        <!--Image-->
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img style="height: 200px" alt="" src="./out/face_detection.png" />
+          <figcaption style="padding-bottom: 15px">
+            Face/Skin Detection Test
+          </figcaption>
+        </div>
         <br />
         Looking at the examples of processing our input images, we can see the
         face/skin detection approach works very well on images without skin
@@ -292,14 +351,6 @@
         range was arrived at by starting with a skin color HSV range from a
         research paper1 and then manually experimenting with values and results.
 
-        <br /><br />
-
-        <!-- Main Results Figure -->
-        <div style="text-align: center">
-          <!--<img style="height: 300px;" alt="" src="results.png">-->
-        </div>
-        <br /><br />
-
         <!-- Results -->
         <h3>Qualitative results</h3>
         <!--Show several visual examples of inputs/outputs of your system (success cases and failures) that help us better understand your approach.-->
@@ -310,6 +361,14 @@
         work for our final project update, we are planning to develop the facial
         detection and color normalization in the functions.
 
+        <br /><br />
+
+        <!-- Main Results Figure -->
+        <div style="text-align: center">
+          <img style="height: 300px" alt="" src="./out/person_test.png" />
+          <img style="height: 300px" alt="" src="./out/beatles_test.png" />
+          <img style="height: 300px" alt="" src="./out/hill_test.png" />
+        </div>
         <br /><br />
 
         <!-- Main Results Figure -->
