@@ -25,17 +25,20 @@ Original file is located at
 #export
 from matplotlib import use
 import numpy as np
+
+from binary_skin import binary_skin
 np.set_printoptions(threshold=np.inf)
 from sklearn.cluster import KMeans
 from skimage.color import rgb2hsv, hsv2rgb, rgb2gray, rgba2rgb
 from skimage import feature, color, draw
 from imageio import imread, imsave
 from scipy import ndimage
-from typing import Tuple
+from typing import Tuple, overload
 from PIL import Image
 from edgeDetection import edgeDetection
 from matplotlib import pyplot as plt
-import texture
+from texture import median_filter, FillColors
+from binary_skin import binary_skin
 
 
 #export
@@ -121,29 +124,50 @@ def quantize_rgb(img: np.ndarray, k: int):
 
     kmeans = KMeans(n_clusters=k, random_state=101).fit(listImg)
     
-    centers = kmeans.cluster_centers_.astype(int)
+    # centers = kmeans.cluster_centers_.astype(int)
+    print(kmeans.cluster_centers_.shape)
+    # kmeans.cluster_centers_ = np.vstack((kmeans.cluster_centers_, np.array([[0, 0, 0]])))
     labels = kmeans.predict(listImg)
-
-    return centers[labels].reshape(x, y, z)
+    print(kmeans.cluster_centers_.shape)
+    return kmeans.cluster_centers_.astype(int)[labels].reshape(x, y, z)
 
     ##########################################################################
     ##########################################################################
     
     return quantized_img
 
-original = imread("../res/images/fish.jpg")
+original = imread("res/images/person_lowres.jpg")
 if original.shape[2] == 4:
     original = rgba2rgb(original).astype(np.uint8)
 
-img_quantize = quantize_rgb(original, k=8)
+# img_quantize = quantize_rgb(original, k=8)
+face_mask = binary_skin(original)
+# face_mask = np.zeros_like(original[:, :, 0])
+img_quantize = median_filter(FillColors(np.copy(original), 15, face_mask).get_img())
+# img_quantize = original
+img_quantize_face = quantize_rgb(original, k=3)
 
-edges, overlaid = edgeDetection(original, img_quantize)
+edges = edgeDetection(original)
+edges_face = edgeDetection(img_quantize_face, 1)
 
-fig, axs = plt.subplots(1, 3)
+overlaid_img = np.copy(img_quantize).astype(np.float32)
+overlaid_img[np.logical_and(edges, np.logical_not(face_mask))] = 0
+overlaid_img[np.logical_and(edges_face, face_mask)] = 0
+overlaid_img = overlaid_img.astype(np.uint8)
+# overlaid_img[edges] = 0
+
+# fig, axs = plt.subplots(2, 3, figsize=(15,15))
+
+# axs[0, 0].imshow(original)
+# axs[0, 1].imshow(face_mask, cmap="gray")
+# axs[0, 2].imshow(edges, cmap="gray")
+# axs[1, 0].imshow(edges_face, cmap="gray")
+# axs[1, 1].imshow(overlaid_img)
+
+fig, axs = plt.subplots(1, 2)
 
 axs[0].imshow(original)
-axs[1].imshow(edges, cmap="gray")
-axs[2].imshow(overlaid)
+axs[1].imshow(overlaid_img)
 
 plt.show()
 # Smooth/reinforce lines

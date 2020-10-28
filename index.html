@@ -1,153 +1,420 @@
 <!DOCTYPE html>
-<html lang="en"><head>  
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta charset="utf-8">
-  <title>Computer Vision Class Project
-  | CS, Georgia Tech | Fall 2020: CS 4476</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>
+      Computer Vision Class Project | CS, Georgia Tech | Fall 2020: CS 4476
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-<!-- Le styles -->  
-  <link href="css/bootstrap.css" rel="stylesheet">
-<style>
-body {
-padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-}
-.vis {
-color: #3366CC;
-}
-.data {
-color: #FF9900;
-}
-</style>
-  
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      .vis {
+        color: #3366cc;
+      }
+      .data {
+        color: #ff9900;
+      }
+    </style>
 
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements --><!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-</head>
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
 
-<body>
-<div class="container">
-<div class="page-header">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
 
-<!-- Title and Name --> 
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <!-- Title and Name -->
 
-<h1 style="text-align: center;">Cartoonify</h1> 
-<p style="font-size: 20px; line-height: 1.5em; text-align: center;"><strong>Joseph Lee, Kelsey Henson, Lydon Puzon, Roger Nhan, Sabrina Chua</strong></p>
-<p style="font-size: 18px; line-height: 1.5em; text-align: center;">Fall 2020 CS 4476 Computer Vision: Class Project</p>
-<p style="font-size: 18px; line-height: 1.5em; text-align: center;">Georgia Tech</p>
+        <h1 style="text-align: center">Cartoonify</h1>
+        <p style="font-size: 20px; line-height: 1.5em; text-align: center">
+          <strong
+            >Joseph Lee, Kelsey Henson, Lydon Puzon, Roger Nhan, Sabrina
+            Chua</strong
+          >
+        </p>
+        <p style="font-size: 18px; line-height: 1.5em; text-align: center">
+          Fall 2020 CS 4476 Computer Vision: Class Project
+        </p>
+        <p style="font-size: 18px; line-height: 1.5em; text-align: center">
+          Georgia Tech
+        </p>
 
-<hr>
+        <hr />
 
-Please see <a href="http://vision.cs.utexas.edu/projects/adapted_attributes/">this</a> for an example of how to lay out the various details of your project. You may need to provide more details than this, beause you will not be submitting an associated paper to accompany the webpage. So the page should be self-contained
-<br><br>
-<h3>Project proposal </h3>
-<a href="./proposal.pdf">Click here</a>
-<br><br>
+        <!-- Please see
+        <a href="http://vision.cs.utexas.edu/projects/adapted_attributes/"
+          >this</a
+        >
+        for an example of how to lay out the various details of your project.
+        You may need to provide more details than this, beause you will not be
+        submitting an associated paper to accompany the webpage. So the page
+        should be self-contained <br /><br /> -->
+        <h3>Project proposal</h3>
+        <a href="./proposal.pdf">Click here</a>
+        <br /><br />
 
-<!-- Goal -->
-<h3>Abstract</h3>
+        <!-- Goal -->
+        <h3>Abstract</h3>
 
-The goal of this project is to stylize an inputted image to appear like a cartoon image. To accomplish this, we will detect the prominent shapes within the image and add an outline to them, as well as normalize the color groups of the image, narrowing each object to a pallet of a predetermined amount of colors. Additionally, we will apply minimal edge outlines within the image to make the primary textures more prominent.
-<br><br>
-<!-- figure -->
-<h3>Teaser figure</h3>
+        The goal of this project is to stylize an inputted image to appear like
+        a cartoon image. To accomplish this, we will detect the prominent shapes
+        within the image and add an outline to them, as well as normalize the
+        color groups of the image, narrowing each object to a pallet of a
+        predetermined amount of colors. Additionally, we will apply minimal edge
+        outlines within the image to make the primary textures more prominent.
+        <br /><br />
+        <!-- figure -->
+        <h3>Teaser figure</h3>
 
-<!-- Main Illustrative Figure --> 
-<div style="text-align: center;">
-<img style="height: 300px;" alt="" src="cartoonifying-image.png">
-</div>
+        <!-- Main Illustrative Figure -->
+        <div style="text-align: center">
+          <img style="height: 300px" alt="" src="cartoonifying-image.png" />
+        </div>
 
-<br><br>
-<!-- Introduction -->
-<h3>Introduction</h3>
-Motivation behind the problem you are solving, what applications it has, any brief background on the particular domain you are working in (if not regular RBG photographs), etc. If you are using a new way to solve an existing problem, briefly mention and describe the existing approaches and tell us how your approach is new.
+        <br /><br />
+        <!-- Introduction -->
+        <h3>Introduction</h3>
+        Our project is attempting to convert an image to a cartoon version of
+        itself. We are effectively producing a “cartoon filter” that can be
+        placed over any image using a series of computer vision functions. It’s
+        main function serves similarly like a snapchat filter or a simplified
+        version of real-life to animation cinema effects.
+        <br />
+        <br />
+        Our approach will take into account many computer vision concepts
+        covered throughout CS4476 such as k means clustering in image coloring,
+        filters applied to even textures, and edge detection while also
+        combining and altering them to find a combination and order that
+        produces efficient and effective results.
 
-<br><br>
-<!-- Approach -->
-<h3>Approach</h3>
-<h5>Normalizing Colors</h5>
-Our approach for altering the colors will include normalizing the color pallet using hue saturation and grouping shade colors together. To normalize the pallet, we will choose a predefined set of colors that generalizes only a few colors to each object. This choice will be made using hue saturation techniques. We will then group together these colors by the objects they belong to in order to reduce the amount of color variation across the image. 
- 
-<h5>Reinforcing Outlines</h5>
-In order to create a hard outline of objects within the object, such as in a cartoon styled image, we will smooth and reinforce the outlines of objects within the images. We will smooth the outlines to be straighter and more defined to reduce excessive corners and line complexity. The techniques used in this will be Canny Edge Detection to first find the object lines and thresholding to detect and increase the thresholds of the images to a larger pixel value. 
- 
-<h5>Smooth Textures</h5>
-To recreate the textures of a cartoon, we will detect highly textured areas within the images and either replace those selected texture patterns with a reduced image bank of smoother textures or apply a median filter to blur the image slightly to reduce the textures. Our team will decide on the final technique utilized here through experimentation on the image to test for best results. 
+        <br /><br />
+        <!-- Approach -->
+        <h3>Approach</h3>
+        <h5>Normalizing Colors</h5>
+        Our approach for altering the colors will include normalizing the color
+        pallet using hue saturation and grouping shade colors together. To
+        normalize the pallet, we will choose a predefined set of colors that
+        generalizes only a few colors to each object. This choice will be made
+        using hue saturation techniques. We will then group together these
+        colors by the objects they belong to in order to reduce the amount of
+        color variation across the image.
 
-<br><br>
-<!-- Results -->
-<h3>Experiments and results</h3>
-Not yet gathered
-<!--Provide details about the experimental set up (number of images/videos, number of datasets you experimented with, train/test split if you used machine learning algorithms, etc.). Describe the evaluation metrics you used to evaluate how well your approach is working. Include clear figures and tables, as well as illustrative qualitative examples if appropriate. Be sure to include obvious baselines to see if your approach is doing better than a naive approach (e.g. for classification accuracy, how well would a classifier do that made random decisions?). Also discuss any parameters of your algorithms, and tell us how you set the values of those parameters. You can also show us how the performance varies as you change those parameter values. Be sure to discuss any trends you see in your results, and explain why these trends make sense. Are the results as expected? Why?-->
-<h5>Smooth Textures</h5>
-For smoothing textures, we initially experimented with various filters including the median, gaussian, and laplace filter. 
-We ran these tests against our compiled 10 images to experiment with initially and visually checked for the desired results.
-For filters such as the gaussian, it resulted in too blurry of a result; therefore, we decided against using those.
-When trying other filters, we also ran into an issue where the filters would discolor the image when the size was set too high and 
-depending on the contrast of the image, the filter size needed to be adjusted. 
-<div style="text-align: center; margin: 15px 0 15px 0;">
-  <img style="height: 200px;" alt="" src="./res/images/hill.jpg">
-  <figcaption style="padding-bottom: 15px;">Original Image</figcaption>
-  <img style="height: 200px;" alt="" src="gaussian_filter.jpg">
-  <figcaption style="padding-bottom: 15px;">Result of applying gaussian filter</figcaption>
-  <img style="height: 200px;" alt="" src="median_filter.jpg">
-  <figcaption>Result of applying median filter with larger filter size</figcaption>
-</div>
+        <h5>Reinforcing Outlines</h5>
+        In order to create a hard outline of objects within the object, such as
+        in a cartoon styled image, we will smooth and reinforce the outlines of
+        objects within the images. We will smooth the outlines to be straighter
+        and more defined to reduce excessive corners and line complexity. The
+        techniques used in this will be Canny Edge Detection to first find the
+        object lines and thresholding to detect and increase the thresholds of
+        the images to a larger pixel value.
 
-Therefore, with these issues to consider, we needed to create a way to consolidate the 
-colors and to create a consistent filter size. To address this, we created a 
-method that would determine areas where the colors are similar and fill them with 
-their average color. To determine if the colors are similar, we used a color 
-threshold where if the difference in color is less than that, then those pixels 
-would be grouped in an area mask. The higher the threshold, the larger the areas 
-that were filled. However, if it was too high, there was too much overlap for the 
-objects and caused the area to be filled as a large blob. The threshold would 
-vary for the given images. As a result, the image produced overall had fewer 
-colors and more solid colors, which is what we expected. Once we were satisfied 
-with the result, we experimented with using the different filters again and 
-decided the median filter visually looked the best. 
+        <h5>Smooth Textures</h5>
+        To recreate the textures of a cartoon, we will detect highly textured
+        areas within the images and either replace those selected texture
+        patterns with a reduced image bank of smoother textures or apply a
+        median filter to blur the image slightly to reduce the textures. Our
+        team will decide on the final technique utilized here through
+        experimentation on the image to test for best results.
 
-<div style="text-align: center; margin: 15px 0 15px 0;">
-  <img style="height: 200px;" alt="" src="texture_filled.jpg">
-  <figcaption style="padding-bottom: 15px;">Result of applying color fill</figcaption>
-  <img style="height: 200px;" alt="" src="texture_filled_with_median_filter.jpg">
-  <figcaption>Result of applying median filter with color fill</figcaption>
-</div>
+        <h5>Handling Faces/Skin</h5>
+        The need for recognizing areas of an image corresponding to both faces
+        and skin is a priority for this project. This is because we want to
+        handle how we cartoonify backgrounds differently from how we cartoonify
+        faces and skin, as cartoons generally use a single skin tone for each
+        person, so the filters and normalization we do on skin and
+        objects/backgrounds need to differ. The main result we obtained from
+        this section is a function that will convert an RGB image into a
+        connected components numpy array with skin sections as connected
+        components.
 
-<br><br>
+        <br /><br />
+        <!-- Results -->
+        <h3>Experiments and results</h3>
+        <!--Provide details about the experimental set up (number of images/videos, number of datasets you experimented with, train/test split if you used machine learning algorithms, etc.). Describe the evaluation metrics you used to evaluate how well your approach is working. Include clear figures and tables, as well as illustrative qualitative examples if appropriate. Be sure to include obvious baselines to see if your approach is doing better than a naive approach (e.g. for classification accuracy, how well would a classifier do that made random decisions?). Also discuss any parameters of your algorithms, and tell us how you set the values of those parameters. You can also show us how the performance varies as you change those parameter values. Be sure to discuss any trends you see in your results, and explain why these trends make sense. Are the results as expected? Why?-->
+        <h5>Normalizing Coloring</h5>
+        In order to provide a cartoon effect on an image, we are simplifying the
+        coloring of the image to fewer, normalized colors. Our function for
+        normalizing the coloring of our test images takes in an input image and
+        averages the colors in each region of the image using kmeans. The
+        resulting output in a "quantized" image in which the pixels have a more
+        uniform distribution across the entire image.
+        <br />
+        <br />
+        A consideration to be made for this function is the k-value being
+        inputted as an argument which controls how many clusters are being
+        formed in the kmeans clustering process. Each test case image will
+        require testing to observe its most effective k-value as while lower
+        k-values result in more thorough averaging (and a more "cartoon"-ified
+        effect), they also reduce the amount of colors in the image as a whole.
+        The k-values in a sense dictate how many colors will be visible in the
+        image as each color correlates to a cluster center. Therefore, a
+        specific image will require a specifically chosen k-value to balance
+        this consideration of preserving coloring and gaining averaged results.
+        <br />
+        <br />
+        This first set of images displays our results for normalizing an image
+        at k=10 cluster centers. The figure in the left represents the
+        non-converted image while the figure on the right represents the
+        converted image. Particularly for the dog itself and the background,
+        this function outputs an image with the coloring visibly simplified from
+        the original.
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./res/images/NormalizingColor2.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Quantization Figure 1
+          </figcaption>
+        </div>
+        <br />
+        The figure below, using k-value=14 cluster center, in this case shows a
+        less distinctive result. Noticeably, the coloring bandana and painting
+        in the background are more normalized to solid colors. The background of
+        wood chips is relatively the same, however, because it is heavily
+        textured. For this instance, we may need to consider adding texture
+        smoothing before color alterations as we continue with the project.
 
-<!-- Main Results Figure --> 
-<div style="text-align: center;">
-<!--<img style="height: 300px;" alt="" src="results.png">-->
-</div>
-<br><br>
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./res/images/NormalizingColor1.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Quantization Figure 2
+          </figcaption>
+        </div>
+        <br />
 
-<!-- Results -->
-<h3>Qualitative results</h3>
-Not yet gathered
-<!--Show several visual examples of inputs/outputs of your system (success cases and failures) that help us better understand your approach.-->
-<br><br>
+        <h5>Edge Detection and outlining</h5>
+        For the automatic edge detection, we used a canny edge detector. We
+        experimented with different sigmas, low thresholds, and high thresholds
+        to find the optimal setting for our needs. To accomplish this, we would
+        take a sample image and plot a 5x5 grid of images, varying the low
+        threshold on the y-axis and the high threshold on the x-axis. We would
+        then run this test for varying sigma values and ultimately decide which
+        configuration gave the best qualitative results. After finding these
+        values, we run the canny edge detection on a gray-scale version of the
+        input image and overlay the resulting edges as a black outline on the
+        image. To better approximate how this would be used in the finished
+        project, we also would first quantize the image before performing these
+        steps. Additional experimentation performed was processing the edge
+        detection on the original image, or a higher bin count quantizated
+        version of the image (k=32), and then overlay those edges on a lower bin
+        count quantized version (k=8). This served the give more outlining
+        detail in the image than is apparent from just the colors, and gave a
+        better sense of texture in the resulting image.
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./out/Edge_Detection_Experimentation.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Edge Detection Experimentation
+          </figcaption>
+        </div>
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./out/Edge_Detection_Test.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Edge Detection Test
+          </figcaption>
+        </div>
+        <br />
+        Outline reinforcement was achieved by using a modification of the canny
+        edge detector. The process of non-maximal suppression retains only the
+        local maxima to obtain an absolute binary map of the edges. This process
+        does not retain an accurate representation of the thickness of the
+        edges. Applying hysteresis thresholding directly to an energy image both
+        accurately represents the edges and their thickness.
+        <br />
+        <br />
+        Another method that will be included in the next iteration is adaptive
+        thresholding. Instead of hysteresis thresholding, which retains points
+        on the edges based on the intensity of the points on the line adjacent
+        to it, adaptive thresholding considers local neighborhoods instead. This
+        will theoretically improve the accuracy of the thickness of the
+        outlines.
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./out/outline_reinforcement.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Outline Reinforcement Test
+          </figcaption>
+        </div>
+        <br />
 
-<!-- Main Results Figure --> 
-<div style="text-align: center;">
-<!--<img style="height: 300px;" alt="" src="qual_results.png">-->
-</div>
-<br><br>
+        <h5>Smooth Textures</h5>
+        For smoothing textures, we initially experimented with various filters
+        including the median, gaussian, and laplace filter. We ran these tests
+        against our compiled 10 images to experiment with initially and visually
+        checked for the desired results. For filters such as the gaussian, it
+        resulted in too blurry of a result; therefore, we decided against using
+        those. When trying other filters, we also ran into an issue where the
+        filters would discolor the image when the size was set too high and
+        depending on the contrast of the image, the filter size needed to be
+        adjusted.
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img style="height: 200px" alt="" src="./res/images/hill.jpg" />
+          <figcaption style="padding-bottom: 15px">Original Image</figcaption>
+          <img style="height: 200px" alt="" src="gaussian_filter.jpg" />
+          <figcaption style="padding-bottom: 15px">
+            Result of applying gaussian filter
+          </figcaption>
+          <img style="height: 200px" alt="" src="median_filter.jpg" />
+          <figcaption>
+            Result of applying median filter with larger filter size
+          </figcaption>
+        </div>
 
+        Therefore, with these issues to consider, we needed to create a way to
+        consolidate the colors and to create a consistent filter size. To
+        address this, we created a method that would determine areas where the
+        colors are similar and fill them with their average color. To determine
+        if the colors are similar, we used a color threshold where if the
+        difference in color is less than that, then those pixels would be
+        grouped in an area mask. The higher the threshold, the larger the areas
+        that were filled. However, if it was too high, there was too much
+        overlap for the objects and caused the area to be filled as a large
+        blob. The threshold would vary for the given images. As a result, the
+        image produced overall had fewer colors and more solid colors, which is
+        what we expected. Once we were satisfied with the result, we
+        experimented with using the different filters again and decided the
+        median filter visually looked the best.
 
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img style="height: 200px" alt="" src="texture_filled.jpg" />
+          <figcaption style="padding-bottom: 15px">
+            Result of applying color fill
+          </figcaption>
+          <img
+            style="height: 200px"
+            alt=""
+            src="texture_filled_with_median_filter.jpg"
+          />
+          <figcaption>
+            Result of applying median filter with color fill
+          </figcaption>
+        </div>
 
+        <br /><br />
 
-  <hr>
-  <footer> 
-  <p>© Joseph Lee, Kelsey Henson, Lydon Puzon, Roger Nhan, Sabrina Chua</p>
-  </footer>
-</div>
-</div>
+        <h5>Handling Faces/Skin</h5>
+        We used rgb2hsv to convert an input image into HSV space. Next, we used
+        thresholding to convert the HSV image into a binary image, only leaving
+        pixels that had H and S values between our determined thresholds. Next,
+        we eroded and dilated 5 times each (not alternating) in order to close
+        gaps. We then applied connected components which resulted in an output
+        numpy array with 0s everywhere and component numbers in the pixels
+        corresponding to connected components. The obstacles encountered were
+        determining a good HSV range to detect skin, as this approach yields
+        suboptimal results on skin colored backgrounds. This could be addressed
+        in the next iteration by strictly implementing a face detector using
+        something like Viola Jones or applying SIFT on the blobs returned by the
+        skin detector.
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img style="height: 200px" alt="" src="./out/face_detection.png" />
+          <figcaption style="padding-bottom: 15px">
+            Face/Skin Detection Test
+          </figcaption>
+        </div>
+        <br />
+        Looking at the examples of processing our input images, we can see the
+        face/skin detection approach works very well on images without skin
+        colored backgrounds--it strictly selects skin regions in the image, and
+        the binary image appears to be very accurate in including only face/skin
+        areas--while performing suboptimal on images with skin colored
+        backgrounds, as the face or skin regions in the binary/connected
+        components images extend beyond the faces/skin regions. Parameters
+        involved here included the number of times we eroded/dilated which
+        affected the extent at which holes were filled as well as the HSV range
+        for skin color detection. The ‘5’ for erosion/dilation was arrived at
+        via manual testing, and it yielded the best results overall. The HSV
+        range was arrived at by starting with a skin color HSV range from a
+        research paper1 and then manually experimenting with values and results.
 
-<br><br>
+        <!-- Results -->
+        <h3>Qualitative results</h3>
+        <!--Show several visual examples of inputs/outputs of your system (success cases and failures) that help us better understand your approach.-->
+        The current result of our midterm project update outputs an image that
+        has normalized colors, more defined edge outlines, and a simple face
+        detection to preserve base facial features. Especially for landscape
+        images, this result is providing a cartoon effect for images. In future
+        work for our final project update, we are planning to develop the facial
+        detection and color normalization in the functions.
 
-</body></html>
+        <div style="text-align: center">
+          <img style="height: 300px" alt="" src="out/hill_test.png" />
+          <figcaption style="margin-top: -20px">
+            Result for hill image
+          </figcaption>
+          <img style="height: 300px" alt="" src="out/jogging_test.png" />
+          <figcaption style="margin-top: -20px">
+            Result for jogging image
+          </figcaption>
+          <img style="height: 300px" alt="" src="out/beatles_test.png" />
+          <figcaption style="margin-top: -20px">
+            Result for Beatles image
+          </figcaption>
+          <img style="height: 300px" alt="" src="out/person_test.png" />
+          <figcaption style="margin-top: -10px">
+            Result for person image
+          </figcaption>
+        </div>
+
+        <br /><br />
+
+        <h3>References:</h3>
+        <ul>
+          1. https://data-flair.training/blogs/computer-vision-project-ideas/
+        </ul>
+        <ul>
+          2.
+          https://web.archive.org/web/20120710232358/http://matmidia.org/sibgrapi2009/media/posters/59928.pdf
+        </ul>
+
+        <!-- Main Results Figure -->
+        <div style="text-align: center">
+          <!--<img style="height: 300px;" alt="" src="qual_results.png">-->
+        </div>
+        <br /><br />
+
+        <hr />
+        <footer>
+          <p>
+            © Joseph Lee, Kelsey Henson, Lydon Puzon, Roger Nhan, Sabrina Chua
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <br /><br />
+  </body>
+</html>
