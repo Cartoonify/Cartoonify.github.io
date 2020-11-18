@@ -19,7 +19,7 @@ from skimage.color import rgb2hsv
 
 def ReadData():
     #Data in format [B G R Label] from
-    data = np.genfromtxt('../data/Skin_NonSkin.txt', dtype=np.int32)
+    data = np.genfromtxt('./data/Skin_NonSkin.txt', dtype=np.int32)
 
     labels= data[:,3]
     data= data[:,0:3]
