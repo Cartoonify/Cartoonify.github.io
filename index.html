@@ -93,11 +93,22 @@
         version of real-life to animation cinema effects.
         <br />
         <br />
+        Some inspirations for our project came from the Medium and Analytics India Cartoon Images
+        where they would take an image, detect the edges, convert it into grayscale, 
+        apply a medium blur, and cartoonify the image. These were separated into the categories:
+        color normalization, edge detection, and texture smoothing; therefore, we decided to move forward on 
+        focusing in these categories to create a cartoonized image. In addition, we
+        found the article "Skin Detection using HSV color space" which was relevant when we were 
+        handling faces and skin detection. The work was a skin detection implementation  
+        by using the H channel to characterize the skin color range, which gave
+        us more insight on how to effectively address faces and skin.
+        <br />
+        <br />
         Our approach will take into account many computer vision concepts
-        covered throughout CS4476 such as k means clustering in image coloring,
+        covered throughout CS4476 such as k-means clustering in image coloring,
         filters applied to even textures, and edge detection while also
         combining and altering them to find a combination and order that
-        produces efficient and effective results.
+        produces efficient and effective results. 
 
         <br /><br />
         <!-- Approach -->
@@ -363,42 +374,66 @@
         <!-- Results -->
         <h3>Qualitative results</h3>
         <!--Show several visual examples of inputs/outputs of your system (success cases and failures) that help us better understand your approach.-->
-        The current result of our midterm project update outputs an image that
+        The result of our project outputs an image that
         has normalized colors, more defined edge outlines, and a simple face
         detection to preserve base facial features. Especially for landscape
-        images, this result is providing a cartoon effect for images. In future
-        work for our final project update, we are planning to develop the facial
-        detection and color normalization in the functions.
+        images, this result is providing a cartoon effect for images. For our
+        failure cases, since there were several small details, the lines were
+        not as clear and the color blended together into a blob. This resulted 
+        in images that did not look as cartoon-like. Our success cases
+        did result in cartoon-like images as they were more simple and 
+        did not have as many similar colors.
 
         <div style="text-align: center">
-          <img style="height: 300px" alt="" src="out/hill_test.png" />
-          <figcaption style="margin-top: -20px">
-            Result for hill image
-          </figcaption>
           <img style="height: 300px" alt="" src="out/jogging_test.png" />
           <figcaption style="margin-top: -20px">
-            Result for jogging image
+            Failure Case: Result for jogging image
+          </figcaption>
+        </br>
+          <img style="height: 200px" alt="" src="out/fish_test.png" />
+          <figcaption style="margin-top: 0px">
+            Failure Case: Result for fish image
+          </figcaption>
+          <img style="height: 300px" alt="" src="out/hill_test.png" />
+          <figcaption style="margin-top: -20px">
+            Success Case: Result for hill image
           </figcaption>
           <img style="height: 300px" alt="" src="out/beatles_test.png" />
           <figcaption style="margin-top: -20px">
-            Result for Beatles image
+            Success Case: Result for Beatles image
           </figcaption>
           <img style="height: 300px" alt="" src="out/person_test.png" />
           <figcaption style="margin-top: -10px">
-            Result for person image
+            Success Case: Result for person image
           </figcaption>
         </div>
 
         <br /><br />
 
+        <h3>Conclusion</h3>
+        <!-- Conclusion would likely make the same points as the abstract. Discuss any future ideas you have to make your approach better. -->
+        In conclusion, our project modified an inputted image to appear similar to
+        a cartoon image. To accomplish this, we detected promininent edges, added
+        minimal edge outlines, normalized the colors, and smoothed textures. Possibly
+        to make our approach better, we could decrease the color palette more so that
+        there would be a more cartoonized look. As well, another future idea could be to 
+        detect specific facial features and replace them with cartoon version (i.e. cartoon eyes).        
+
         <h3>References:</h3>
-        <ul>
-          1. https://data-flair.training/blogs/computer-vision-project-ideas/
-        </ul>
-        <ul>
-          2.
-          https://web.archive.org/web/20120710232358/http://matmidia.org/sibgrapi2009/media/posters/59928.pdf
-        </ul>
+        <ol>
+          <li>
+            https://data-flair.training/blogs/computer-vision-project-ideas/
+          </li>
+          <li>
+            https://web.archive.org/web/20120710232358/http://matmidia.org/sibgrapi2009/media/posters/59928.pdf
+          </li>
+          <li>
+            https://analyticsindiamag.com/converting-an-image-to-a-cartoon/ 
+          </li>
+          <li>
+            https://medium.com/towards-artificial-intelligence/an-insiders-guide-to-cartoonization-using-machine-learning-ce3648adfe8
+          </li>
+        </ol>
 
         <!-- Main Results Figure -->
         <div style="text-align: center">
