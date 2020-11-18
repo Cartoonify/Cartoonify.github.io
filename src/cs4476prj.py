@@ -26,7 +26,6 @@ Original file is located at
 from matplotlib import use
 import numpy as np
 
-from binary_skin import binary_skin
 np.set_printoptions(threshold=np.inf)
 from sklearn.cluster import KMeans
 from skimage.color import rgb2hsv, hsv2rgb, rgb2gray, rgba2rgb
@@ -38,7 +37,7 @@ from PIL import Image
 from edgeDetection import edgeDetection, edgeDetailDetection
 from matplotlib import pyplot as plt
 from texture import median_filter, FillColors
-from binary_skin import binary_skin
+from binary_skin import binary_skin_erosion_dilation
 
 
 #export
@@ -136,12 +135,13 @@ def quantize_rgb(img: np.ndarray, k: int):
     
     return quantized_img
 
-original = imread("res/images/landscape_lowres.jpg")
+original = imread("../res/images/person_lowres.jpg")
+
 if original.shape[2] == 4:
     original = rgba2rgb(original).astype(np.uint8)
 
 # img_quantize = quantize_rgb(original, k=8)
-face_mask = binary_skin(original)
+face_mask = binary_skin_erosion_dilation(original)
 # face_mask = np.zeros_like(original[:, :, 0])
 img_quantize = median_filter(FillColors(np.copy(original), 15, face_mask).get_img())
 # img_quantize = original
