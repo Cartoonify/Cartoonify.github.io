@@ -35,7 +35,7 @@ from imageio import imread, imsave
 from scipy import ndimage
 from typing import Tuple, overload
 from PIL import Image
-from edgeDetection import edgeDetection
+from edgeDetection import edgeDetection, edgeDetailDetection
 from matplotlib import pyplot as plt
 from texture import median_filter, FillColors
 from binary_skin import binary_skin
@@ -136,7 +136,7 @@ def quantize_rgb(img: np.ndarray, k: int):
     
     return quantized_img
 
-original = imread("res/images/person_lowres.jpg")
+original = imread("res/images/landscape_lowres.jpg")
 if original.shape[2] == 4:
     original = rgba2rgb(original).astype(np.uint8)
 
@@ -147,11 +147,13 @@ img_quantize = median_filter(FillColors(np.copy(original), 15, face_mask).get_im
 # img_quantize = original
 img_quantize_face = quantize_rgb(original, k=3)
 
-edges = edgeDetection(original)
+edges = edgeDetection(img_quantize)
+edgesDetail = edgeDetailDetection(original)
 edges_face = edgeDetection(img_quantize_face, 1)
 
 overlaid_img = np.copy(img_quantize).astype(np.float32)
 overlaid_img[np.logical_and(edges, np.logical_not(face_mask))] = 0
+overlaid_img[np.logical_and(edgesDetail, np.logical_not(face_mask))] *= 0.5
 overlaid_img[np.logical_and(edges_face, face_mask)] = 0
 overlaid_img = overlaid_img.astype(np.uint8)
 # overlaid_img[edges] = 0
