@@ -6,3 +6,8 @@ def edgeDetection(img, sigma=2):
     img_gray = rgb2gray(img.astype(np.uint8))
     edges = feature.canny(img_gray, sigma=sigma, low_threshold=0.1, high_threshold=0.3)
     return edges
+
+def edgeDetailDetection(img, sigma=1):
+    img_gray = rgb2gray(img.astype(np.uint8))
+    edges = feature.canny(img_gray, sigma=sigma, low_threshold=0.1, high_threshold=0.3)
+    return edges
