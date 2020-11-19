@@ -180,7 +180,7 @@ overlaid_img = overlaid_img.astype(np.uint8)
 fig, axs = plt.subplots(1, 2)
 
 axs[0].imshow(original)
-axs[1].imshow(face_mask, cmap="gray")
+axs[1].imshow(overlaid_img)
 
 plt.show()
 # Smooth/reinforce lines

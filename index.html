@@ -98,7 +98,8 @@
         apply a medium blur, and cartoonify the image. These were separated into the categories:
         color normalization, edge detection, and texture smoothing; therefore, we decided to move forward on 
         focusing in these categories to create a cartoonized image. In addition, we
-        found the article "Skin Detection using HSV color space" which was relevant when we were 
+        found the article "Skin Detection using HSV color space" as well as a repository that used sklearn's 
+        model selection's train_test_split which was relevant when we were 
         handling faces and skin detection. The work was a skin detection implementation  
         by using the H channel to characterize the skin color range, which gave
         us more insight on how to effectively address faces and skin. Check out our references
@@ -352,7 +353,7 @@
         <br /><br />
 
         <h5>Handling Faces/Skin</h5>
-        We used rgb2hsv to convert an input image into HSV space. Next, we used
+        Our first approach is as follows: We used rgb2hsv to convert an input image into HSV space. Next, we used
         thresholding to convert the HSV image into a binary image, only leaving
         pixels that had H and S values between our determined thresholds. Next,
         we eroded and dilated 5 times each (not alternating) in order to close
@@ -360,15 +361,45 @@
         numpy array with 0s everywhere and component numbers in the pixels
         corresponding to connected components. The obstacles encountered were
         determining a good HSV range to detect skin, as this approach yields
-        suboptimal results on skin colored backgrounds. This could be addressed
+        suboptimal results on skin colored backgrounds. We determined this could be addressed
         in the next iteration by strictly implementing a face detector using
         something like Viola Jones or applying SIFT on the blobs returned by the
         skin detector.
         <br />
+        <br />
+        Using the information and data we gathered from our first approach, we 
+        came up with our second approach.  We used sklearn's model selection's 
+        train_test_split as well as a multitude of skin/not-skin HSV data points 
+        in order to designate which pixels were most likely skin pixels.  We continued 
+        using erosion and dilation, and the results were several times better.  There 
+        were much fewer false positives for pixels being marked as skin, and the areas 
+        were much more accurate with regard to their outer edges.  The only major obstacle 
+        we encountered was determining how to handle erosion and dilation, as this 
+        method resulted in more grainy binary images.  In addition, because this 
+        method still works in HSV space, there were occasions where skin colored 
+        backgrounds were marked as skin; however, this happened significantly less 
+        frequently compared to our previous approach.  This would most effectively 
+        be addressed by using a neural net or some other form of machine learning 
+        to recognize faces based on features and not just skin color.
+        <br />
         <div style="text-align: center; margin: 15px 0 15px 0">
           <img style="height: 200px" alt="" src="./out/face_detection.png" />
           <figcaption style="padding-bottom: 15px">
-            Face/Skin Detection Test
+            Face/Skin Detection Test 1
+          </figcaption>
+        </div>
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img style="height: 200px" alt="" src="./out/face_detection_2.png" />
+          <figcaption style="padding-bottom: 15px">
+            Face/Skin Detection Test 2
+          </figcaption>
+        </div>
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img style="height: 200px" alt="" src="./out/face_detection_failure.JPG" />
+          <figcaption style="padding-bottom: 15px">
+            Face/Skin Detection Failure
           </figcaption>
         </div>
         <br />
