@@ -132,13 +132,14 @@
         object lines and thresholding to detect and increase the thresholds of
         the images to a larger pixel value.
 
-        <h5>Smooth Textures</h5>
-        To recreate the textures of a cartoon, we will detect highly textured
-        areas within the images and either replace those selected texture
-        patterns with a reduced image bank of smoother textures or apply a
-        median filter to blur the image slightly to reduce the textures. Our
-        team will decide on the final technique utilized here through
-        experimentation on the image to test for best results.
+        <h5>Simplified Texturing</h5>
+        To recreate the textures of a cartoon, we will perform an additional
+        Canny Edge Detection pass with more sensitive parameters, then overlay
+        those edges as a darkened line on the image. This performs similar to the
+        reinforced outlines, except the edges are much more prevalent, and they
+        are overlayed on the image in a softer, lower constrast form. This serves
+        to give additional texturing onto the final image to give more details to
+        the surfaces present in the image.
 
         <h5>Handling Faces/Skin</h5>
         The need for recognizing areas of an image corresponding to both faces
@@ -254,6 +255,25 @@
             Edge Detection Test
           </figcaption>
         </div>
+        <br />
+        <h5>Simplified Texturing</h5>
+        For the texturing, we applied the same edge detection experimentation
+        to find the appropriate parameters for gathering the texture edges. For
+        this, we found that the same low and high thresholds with a sigma value
+        of 1 acheived the best results.
+        
+        <br />
+        <div style="text-align: center; margin: 15px 0 15px 0">
+          <img
+            style="height: 200px"
+            alt=""
+            src="./out/Texture_Test.png"
+          />
+          <figcaption style="padding-bottom: 15px">
+            Texture Test
+          </figcaption>
+        </div>
+        
         <br />
         Outline reinforcement was achieved by using a modification of the canny
         edge detector. The process of non-maximal suppression retains only the
