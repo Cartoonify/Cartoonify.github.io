@@ -398,7 +398,10 @@
         method resulted in more grainy binary images.  In addition, because this 
         method still works in HSV space, there were occasions where skin colored 
         backgrounds were marked as skin; however, this happened significantly less 
-        frequently compared to our previous approach.  This would most effectively 
+        frequently compared to our previous approach.  The only minor problem that 
+        arose from switching to this approach was that extremely bright skin resulting 
+        from reflections of the room lighting occasionally was not picked up by 
+        our skin detection algorithm.  This would most effectively 
         be addressed by using a neural net or some other form of machine learning 
         to recognize faces based on features and not just skin color.
         <br />
