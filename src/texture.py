@@ -21,7 +21,8 @@ class FillColors():
         self.curr_color = None
         
         self.filled_locations = np.zeros(img.shape, dtype=bool)
-        
+        self.filled_locations[face_mask] = True
+
         filled_flag = True
         print('Filling colors...')
         while filled_flag:

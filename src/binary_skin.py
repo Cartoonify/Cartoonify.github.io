@@ -19,7 +19,7 @@ from tree import applyToArrayReturnArray
 # hue and saturation values modified from https://stackoverflow.com/a/8757076
 def binary_skin_erosion_dilation(img):
     newImg = applyToArrayReturnArray(img, True).reshape((img.shape[0], img.shape[1]))
-    kernel = np.array([[0, 0, 1, 0, 0], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0], [0, 0, 1, 0, 0]])
+    kernel = np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]])
     newImg = ndimage.binary_erosion(newImg, structure=kernel, iterations=1).astype(int)
     newImg = ndimage.binary_dilation(newImg, structure=kernel, iterations=1).astype(int)
     return newImg

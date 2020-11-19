@@ -135,13 +135,22 @@ def quantize_rgb(img: np.ndarray, k: int):
     
     return quantized_img
 
-original = imread("../res/images/person_lowres.jpg")
+original = imread("../res/images/person2.jpg")
 
 if original.shape[2] == 4:
     original = rgba2rgb(original).astype(np.uint8)
 
 # img_quantize = quantize_rgb(original, k=8)
 face_mask = binary_skin_erosion_dilation(original)
+original_hsv = rgb2hsv(original)
+if np.max(face_mask) != 0:
+    skin_avgR = np.average(original_hsv[:,:,0], weights=face_mask)
+    skin_avgG = np.average(original_hsv[:,:,1], weights=face_mask)
+    skin_avgB = np.average(original_hsv[:,:,2], weights=face_mask)
+    hsvArr = np.array([skin_avgR, skin_avgG, skin_avgB])
+    rgbArr = (hsv2rgb(hsvArr) * 255).astype(np.uint8)
+    print(rgbArr)
+
 # face_mask = np.zeros_like(original[:, :, 0])
 img_quantize = median_filter(FillColors(np.copy(original), 15, face_mask).get_img())
 # img_quantize = original
@@ -149,12 +158,14 @@ img_quantize_face = quantize_rgb(original, k=3)
 
 edges = edgeDetection(img_quantize)
 edgesDetail = edgeDetailDetection(original)
-edges_face = edgeDetection(img_quantize_face, 1)
+edges_face = edgeDetection(img_quantize_face, 2)
 
 overlaid_img = np.copy(img_quantize).astype(np.float32)
+if np.max(face_mask) != 0:
+    overlaid_img[face_mask == 1] = rgbArr
 overlaid_img[np.logical_and(edges, np.logical_not(face_mask))] = 0
 overlaid_img[np.logical_and(edgesDetail, np.logical_not(face_mask))] *= 0.5
-overlaid_img[np.logical_and(edges_face, face_mask)] = 0
+overlaid_img[np.logical_and(edges_face, face_mask)] *= 0.9
 overlaid_img = overlaid_img.astype(np.uint8)
 # overlaid_img[edges] = 0
 
@@ -169,7 +180,7 @@ overlaid_img = overlaid_img.astype(np.uint8)
 fig, axs = plt.subplots(1, 2)
 
 axs[0].imshow(original)
-axs[1].imshow(overlaid_img)
+axs[1].imshow(face_mask, cmap="gray")
 
 plt.show()
 # Smooth/reinforce lines
