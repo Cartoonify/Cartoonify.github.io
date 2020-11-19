@@ -393,7 +393,10 @@
         in order to designate which pixels were most likely skin pixels.  We continued 
         using erosion and dilation, and the results were several times better.  There 
         were much fewer false positives for pixels being marked as skin, and the areas 
-        were much more accurate with regard to their outer edges.  The only major obstacle 
+        were much more accurate with regard to their outer edges.  We went on to use 
+        this data to compute the average RGB values of the skin pixels and then set all 
+        pixels in the original image corresponding to those of face mask to this value 
+        prior to any smoothing or color quantizing.  The only major obstacle 
         we encountered was determining how to handle erosion and dilation, as this 
         method resulted in more grainy binary images.  In addition, because this 
         method still works in HSV space, there were occasions where skin colored 
